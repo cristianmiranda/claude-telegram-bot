@@ -38,6 +38,8 @@ class ClaudeRunner:
         self.timeout = timeout
         self.model = model
 
+        logger.info(f"Claude model: {model or 'default'}")
+
     async def run(
         self,
         message: str,
