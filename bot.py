@@ -38,6 +38,7 @@ class ClaudeTelegramBot:
         self.claude_runner = ClaudeRunner(
             config.project_dir,
             config.claude_binary,
+            model=config.claude_model,
         )
         self.handler = MessageHandler(
             self.claude_runner,

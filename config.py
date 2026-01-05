@@ -66,6 +66,7 @@ class Config:
     custom_commands: dict[str, str] = field(default_factory=dict)
     bot_name: str = "Claude bot"
     claude_binary: str = "claude"
+    claude_model: str | None = None
 
     @classmethod
     def load(cls, env_path: Path | None = None) -> "Config":
@@ -127,6 +128,9 @@ class Config:
         # Optional bot name for personalization
         bot_name = os.getenv("TELEGRAM_BOT_NAME", "Claude bot")
 
+        # Optional Claude model (e.g., "sonnet", "opus", "haiku")
+        claude_model = os.getenv("CLAUDE_MODEL")
+
         return cls(
             telegram_token=token,
             authorized_users=authorized_users,
@@ -134,4 +138,5 @@ class Config:
             sessions_file=sessions_file,
             custom_commands=custom_commands,
             bot_name=bot_name,
+            claude_model=claude_model,
         )

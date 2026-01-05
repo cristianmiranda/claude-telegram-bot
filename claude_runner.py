@@ -23,6 +23,7 @@ class ClaudeRunner:
         project_dir: Path,
         claude_binary: str = "claude",
         timeout: float = 300.0,
+        model: Optional[str] = None,
     ):
         """Initialize Claude runner.
 
@@ -30,10 +31,12 @@ class ClaudeRunner:
             project_dir: Directory to run Claude from (where CLAUDE.md lives).
             claude_binary: Path to claude CLI binary.
             timeout: Maximum execution time in seconds.
+            model: Claude model to use (e.g., "sonnet", "opus", "haiku").
         """
         self.project_dir = project_dir
         self.claude_binary = claude_binary
         self.timeout = timeout
+        self.model = model
 
     async def run(
         self,
@@ -56,6 +59,10 @@ class ClaudeRunner:
             asyncio.TimeoutError: If execution exceeds timeout.
         """
         cmd = [self.claude_binary]
+
+        # Add model if specified
+        if self.model:
+            cmd.extend(["--model", self.model])
 
         # Add session handling
         if resume and session_id:

@@ -76,6 +76,7 @@ The filename (without `.md`) becomes the command name:
 | `TELEGRAM_BOT_TOKEN` | ✅ | Bot token from @BotFather |
 | `TELEGRAM_AUTHORIZED_USERS` | ✅ | Comma-separated user IDs |
 | `TELEGRAM_BOT_NAME` | ❌ | Bot name (default: "Claude bot") |
+| `CLAUDE_MODEL` | ❌ | Claude model to use (e.g., "sonnet", "opus", "haiku") |
 
 ## 📁 Volume Mounts
 
