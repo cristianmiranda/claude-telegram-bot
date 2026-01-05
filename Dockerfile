@@ -20,7 +20,8 @@ RUN pip install --no-cache-dir .
 # Create non-root user (Claude CLI refuses --dangerously-skip-permissions as root)
 RUN useradd -m -s /bin/bash claude && \
     mkdir -p /home/claude/.claude && \
-    chown -R claude:claude /home/claude
+    chown -R claude:claude /home/claude && \
+    chmod -R 755 /bot
 
 # Runtime working directory (project mounts here)
 WORKDIR /app
