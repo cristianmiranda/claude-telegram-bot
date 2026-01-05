@@ -50,6 +50,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./:/app
+      - ~/.claude:/home/claude/.claude  # Claude CLI authentication
 ```
 
 ### 5. Run the bot
@@ -82,7 +83,9 @@ The filename (without `.md`) becomes the command name:
 | `TELEGRAM_AUTHORIZED_USERS` | Yes | Comma-separated user IDs |
 | `TELEGRAM_BOT_NAME` | No | Bot name (default: "Claude bot") |
 
-## Volume Mount
+## Volume Mounts
+
+### Project Directory
 
 Mount your entire project to `/app`:
 
@@ -95,6 +98,17 @@ The bot expects to find in `/app`:
 - `.env` - Configuration
 - `.claude/commands/` - Command definitions
 - `CLAUDE.md` - Agent instructions (optional but recommended)
+
+### Claude CLI Authentication
+
+Mount your local Claude CLI configuration to enable authentication:
+
+```yaml
+volumes:
+  - ~/.claude:/home/claude/.claude
+```
+
+This directory contains your Claude CLI authentication tokens. The container runs as the `claude` user (not root) because the Claude CLI requires a non-root user. You must authenticate on the host machine first by running `claude` and completing the login flow.
 
 ## Local Development
 
