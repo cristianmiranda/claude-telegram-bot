@@ -157,7 +157,7 @@ class ClaudeRunner:
                 if line.strip() and not response_text:
                     response_text = line
 
-        return response_text or output
+        return response_text
 
     async def run_command(
         self,

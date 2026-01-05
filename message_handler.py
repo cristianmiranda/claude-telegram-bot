@@ -110,7 +110,9 @@ class MessageHandler:
         logger.info(f"Command /{command} from {username}")
 
         # Commands are sent as slash commands to Claude
-        await self._process_with_claude(update, context, f"/{command}")
+        # Convert underscore back to hyphen (Telegram uses _ but Claude uses -)
+        claude_command = command.replace("_", "-")
+        await self._process_with_claude(update, context, f"/{claude_command}")
 
     async def _process_with_claude(
         self,
